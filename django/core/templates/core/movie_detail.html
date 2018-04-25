@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ object.title }} - {{ block.super }}
+{% endblock %}
+
+{% block main %}
+<h1>{{ object }}</h1>
+<p class="lead">
+{{ object.plot }}
+</p>
+  <p>Directed by {{ object.director }}</p>
+  <p>Written by {{ object.writers.all|unordered_list }}</p>
+  <h2>Actors</h2>
+  <ul>
+  {% for credit in object.role_set.all %}
+    <li><a href="{% url 'core:PersonDetail' pk=credit.person.id %}">{{ credit.person }}: {{ credit.billing }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block sidebar %}
+<div>
+This movie is rated:
+  <span class="badge badge-primary">
+  {{ object.get_rating_display }}
+  </span>
+</div>
+{% endblock %}
