@@ -5,33 +5,66 @@
 {% endblock %}
 
 {% block main %}
-<h1>{{ object }}</h1>
-<p class="lead">
-{{ object.plot }}
-</p>
-  <p>Directed by {{ object.director }}</p>
-  <p>Written by {{ object.writers.all|unordered_list }}</p>
-  <h2>Actors</h2>
-  <ul>
-  {% for credit in object.role_set.all %}
-    <li><a href="{% url 'core:PersonDetail' pk=credit.person.id %}">{{ credit.person }}: {{ credit.billing }}</a></li>
-  {% endfor %}
-  </ul>
+  <div class="col" >
+    <h1 >{{ object }}</h1 >
+    <p class="lead" >
+      {{ object.plot }}
+    </p >
+  </div >
+  <ul class="movie-image list-inline" >
+    {% for i in object.movieimage_set.all %}
+      <li class="list-inline-item" >
+        <img src="{{ i.image.url }}" >
+      </li >
+    {% endfor %}
+  </ul >
+  <p >Directed
+    by {{ object.director }}</p >
+  <p >Written
+    by {{ object.writers.all|unordered_list }}</p >
+  <h2 >Actors</h2 >
+  <ul >
+    {% for credit in object.role_set.all %}
+      <li >
+        <a href="{% url 'core:PersonDetail' pk=credit.person.id %}" >
+          {{ credit.person }}: {{ credit.billing }}
+        </a >
+      </li >
+    {% endfor %}
+  </ul >
 {% endblock %}
 
 {% block sidebar %}
   <div >
     This movie is rated:
     <span class="badge badge-primary" >
-  {{ object.get_rating_display }}
-  </span >
+      {{ object.get_rating_display }}
+    </span >
   </div >
+  {% if image_form %}
+    <div >
+      <h2 >Upload New Image</h2 >
+      <form method="post"
+            enctype="multipart/form-data"
+            action="{% url 'core:MovieImageUpload' movie_id=object.id %}" >
+        {% csrf_token %}
+        {{ image_form.as_p }}
+        <p >
+          <button
+              class="btn btn-primary" >
+            Upload
+          </button >
+        </p >
+      </form >
+    </div >
+  {% endif %}
   <div >
     <h2 >
-      Score: {{ object.score|default_if_none:"TBD" }}
+      Score:
+      {{ object.score|default_if_none:"TBD" }}
     </h2 >
-  </div>
-  <div>
+  </div >
+  <div >
     {% if vote_form %}
       <form
           method="post"

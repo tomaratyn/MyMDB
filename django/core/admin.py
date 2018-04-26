@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from core.models import (
-    Movie, Person, Role)
+    Movie, Person, Role, MovieImage)
 
 
 class DirectorInline(admin.StackedInline):
@@ -70,3 +70,4 @@ admin.site.register(Movie, MovieAdmin)
 
 admin.site.register(Person, PersonAdmin)
 
+admin.site.register(MovieImage)
