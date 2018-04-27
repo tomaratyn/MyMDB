@@ -2,4 +2,3 @@ django<2.1
 psycopg2
 Pillow<4.4.0
 python-memcached==1.58
-django-debug-toolbar==1.8

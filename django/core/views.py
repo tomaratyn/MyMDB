@@ -8,12 +8,6 @@ from django.core.exceptions import (
     PermissionDenied)
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.decorators import (
-    method_decorator)
-from django.views.decorators.cache import (
-    cache_page)
-from django.views.decorators.vary import (
-    vary_on_cookie)
 from django.views.generic import (
     ListView, DetailView, UpdateView,
     CreateView

@@ -1,0 +1,17 @@
+.mymdb-masthead {
+  background-color: #EEEEEE;
+  margin-bottom: 1em;
+}
+
+.errorlist {
+  color: #e11;
+}
+
+.movie-image img {
+  max-height: 10em;
+  max-width: 10em;
+}
+
+.mymdb-sidebar > div {
+  margin-bottom: 1em;
+}
